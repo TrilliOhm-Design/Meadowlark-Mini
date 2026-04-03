@@ -3,31 +3,22 @@
 ![Banner showing PCB](https://github.com/colinhalebrown/Meadowlark-Mini/blob/main/Documentation/images/banner.jpg)
 
 ### Known Issues
-* Move Boot pads closer together
-* Add reset pads for pico-SDK development
-* Fix battery connector positive and negative poles are backwards (Swaped connector for testing)
+* none
 
-I ordered the PCBs with all of the china only components on one side of the board to to save on shipping and assembly time.
+Boards have paste added using a stencil
 
-![PCB on arrival](https://github.com/colinhalebrown/Meadowlark-Mini/blob/main/Documentation/images/IMG_4507.jpeg)
+![PCB with paste](https://github.com/colinhalebrown/Meadowlark-Mini/blob/main/Documentation/images/IMG_4507.jpeg)
 
-I then assembled the bottom of the board by hand.
+Components are added to the board by hand 
 
-![Bottom of board](https://github.com/colinhalebrown/Meadowlark-Mini/blob/main/Documentation/images/IMG_4530.jpeg)
+![Top of board pre bake](https://github.com/colinhalebrown/Meadowlark-Mini/blob/main/Documentation/images/IMG_4530.jpeg)
 
-With connectors on both sides of the board and an exposed PCB I wanted to protect the board. I made a two part case that is minimal, acts as a standoff for the board and can lock the microSD card in completely with the top installed. 
+The board is then baked and the solder joints inspected. Board tested for shorts. After testing the board either needs rework or is cleared for a microcontroller. The controller and power plug are soldiered by hand to the bottom.
 
-![PCB bottom case](https://github.com/colinhalebrown/Meadowlark-Mini/blob/main/Documentation/images/IMG_4573.jpeg)
+![Bottom of Board](https://github.com/colinhalebrown/Meadowlark-Mini/blob/main/Documentation/images/IMG_4530.jpeg)
 
-![PCB top case](https://github.com/colinhalebrown/Meadowlark-Mini/blob/main/Documentation/images/IMG_4571.jpeg)
+The boards are then tested and conformal coated once all rework as been completed. Ports, Plugs, buttons, and sensors are avoided to prevent loss of functionality. 
 
-![PCB on its side](https://github.com/colinhalebrown/Meadowlark-Mini/blob/main/Documentation/images/IMG_4570.jpeg)
-
-The case is designed in two parts, the top is intended to protect the components while not muting the buzzer and allowing the sensors to get fresh air. The bottom of the case brings the battery connector flush to the mounting surface and protects the components on the bottom.
-
-| Top | Bottom |
-| --- | ------ |
-| ![Top Enclosure](https://github.com/colinhalebrown/Meadowlark-Mini/blob/main/Documentation/images/CaseTop_v6.png) | ![Bottom Enclosure](https://github.com/colinhalebrown/Meadowlark-Mini/blob/main/Documentation/images/CaseBottom_v6.png) |
-
+The enclosure was removed to save weight and allow for users to incorporate the board into their AV bays easier.
 
 ![PCB on its side](https://github.com/colinhalebrown/Meadowlark-Mini/blob/main/Documentation/images/IMG_4572.jpeg)
