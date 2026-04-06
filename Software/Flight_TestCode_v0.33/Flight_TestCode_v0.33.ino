@@ -29,12 +29,12 @@
 #define BURNOUT_ACCEL_G       0.3f
 #define APOGEE_DROP_M         5.0f
 #define DROUGE_DELAY_S        2.0f
-#define MAIN_DEPLOY_ALT_M   150.0f
+#define MAIN_DEPLOYING_ALT_M   150.0f
 #define PYRO_FIRE_MS          500
 
 // -- Minimum time guards (ms) ---------------------------------------
 #define MIN_TIME_POWERED_MS   500
-#define MIN_TIME_COAST_MS     200
+#define MIN_TIME_COASTING_MS     200
 #define MIN_TIME_DROGUE_MS   1000
 #define MIN_TIME_LANDED_MS   3000
 
@@ -58,12 +58,13 @@ KalmanState kAccZ = {0, 0, 1.0f, 0.05f, 1.5f};
 // -------------------------------------------------------------------
 
 enum FlightState : uint8_t {
-  PRE_LAUNCH     = 0,
-  POWERED_ASCENT = 1,
-  COAST          = 2,
-  DROGUE_DEPLOY  = 3,
-  MAIN_DEPLOY    = 4,
-  LANDED         = 5
+  PRE_LAUNCH       = 0,
+  ASCENTING        = 1,
+  COASTING         = 2,
+  DROUGE_DEPLOYING = 3,
+  MAIN_DEPLOYING   = 4,
+  LANDING          = 5,
+  LANDED           = 6
 };
 
 // -------------------------------------------------------------------
@@ -75,7 +76,7 @@ MS5611          baro;
 Preferences     prefs;
 
 FlightState   state            = PRE_LAUNCH;
-unsigned long stateEntry       = 0;
+unsigned long stateEntryTime       = 0;
 bool          landedActionDone = false;
 
 float altBase     = 0.0f;
@@ -367,7 +368,7 @@ void readSensors() {
   float altMSL = baro.getAltitude();
   altFiltered  = kalmanUpdate(kAlt, altMSL - altBase, dt);
 
-  float rawX = imu.readFloatAccelX() * 2;
+  float rawX = imu.readFloatAccelX() * 2; // Values multiplied by two to fix library being dumb
   float rawY = imu.readFloatAccelY() * 2;
   float rawZ = imu.readFloatAccelZ() * 2;
   float calX, calY, calZ;
@@ -385,19 +386,19 @@ void readSensors() {
 
 void enterState(FlightState s) {
   state      = s;
-  stateEntry = millis();
+  stateEntryTime = millis();
   Serial.print(F("[STATE] ")); Serial.println(s);
 }
 
 bool timeInState(unsigned long minMs) {
-  return (millis() - stateEntry) >= minMs;
+  return (millis() - stateEntryTime) >= minMs;
 }
 
 void firePyro(uint8_t pin, uint8_t flagBit) {
   digitalWrite(pin, HIGH);
   delay(PYRO_FIRE_MS);
   digitalWrite(pin, LOW);
-  logFlags |= flagBit;
+  logFlags |= flagBit; //Rename FlagByte
 }
 
 void startChime() {
@@ -428,8 +429,6 @@ void startChime() {
 // -------------------------------------------------------------------
 
 void runStateMachine() {
-  readSensors();
-
   switch (state) {
 
     case PRE_LAUNCH:
@@ -443,31 +442,46 @@ void runStateMachine() {
         logCount         = 0;
         logSkip          = 0;
         landedActionDone = false;
-        enterState(POWERED_ASCENT);
+        enterState(ASCENTING);
       }
       break;
 
-    case POWERED_ASCENT:
+    case ASCENTING:
       digitalWrite(PIN_LED, HIGH);
       if (timeInState(MIN_TIME_POWERED_MS) && accZFilt < BURNOUT_ACCEL_G)
-        enterState(COAST);
+        enterState(COASTING);
       break;
 
-    case COAST:
-      if (altFiltered > altApogee) altApogee = altFiltered;
-      if (timeInState(MIN_TIME_COAST_MS) && (altApogee - altFiltered) > APOGEE_DROP_M)
-        enterState(DROGUE_DEPLOY);
+    case COASTING:
+      if (altFiltered > altApogee) altApogee = altFiltered; //Move to sensor reading
+      if (timeInState(MIN_TIME_COASTING_MS) && (altApogee - altFiltered) > APOGEE_DROP_M)
+        enterState(DROUGE_DEPLOYING);
       break;
 
-    case DROGUE_DEPLOY:
+    case DROUGE_DEPLOYING:
       firePyro(PIN_PYRO_1, 0x01);
-      enterState(MAIN_DEPLOY);
+      enterState(MAIN_DEPLOYING);
       break;
 
-    case MAIN_DEPLOY:
-      if (timeInState(MIN_TIME_DROGUE_MS) && altFiltered < MAIN_DEPLOY_ALT_M) {
+    case MAIN_DEPLOYING:
+      if (timeInState(MIN_TIME_DROGUE_MS) && altFiltered < MAIN_DEPLOYING_ALT_M) {
         firePyro(PIN_PYRO_2, 0x02);
-        enterState(LANDED);
+        enterState(LANDED); // Landing
+      }
+      break;
+
+	case LANDING: // UPDATE THIS STATE TO REFLET THE CHECK
+      handleSerialCommands();
+      if (timeInState(MIN_TIME_LANDED_MS) && !landedActionDone) {
+        landedActionDone = true;
+        nvsSave(altApogee, flightMaxG);
+        Serial.println(F("Landed. Send D to dump log, R for records."));
+        Serial.print(F("  Apogee : ")); Serial.print(altApogee, 1); Serial.println(F(" m"));
+        Serial.print(F("  Max G  : ")); Serial.print(flightMaxG, 2); Serial.println(F(" G"));
+        tone(PIN_BUZZER, 2200, 150);
+        delay(400);
+        tone(PIN_BUZZER, 1800, 150);
+        delay(600);
       }
       break;
 
@@ -542,5 +556,6 @@ void setup() {
 
 void loop() {
   esp_task_wdt_reset();
+  readSensors(); //Make case to switch from reading sensors to injecting simulated sensors for ground flight test
   runStateMachine();
 }
