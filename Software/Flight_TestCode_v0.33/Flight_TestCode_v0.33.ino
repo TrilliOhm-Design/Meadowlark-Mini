@@ -25,18 +25,18 @@
 #define PIN_LED      15
 
 // -- Flight thresholds ----------------------------------------------
-#define LAUNCH_ACCEL_G        2.5f
-#define BURNOUT_ACCEL_G       0.3f
-#define APOGEE_DROP_M         5.0f
-#define DROUGE_DELAY_S        2.0f
+#define LAUNCH_ACCEL_G         2.5f
+#define BURNOUT_ACCEL_G        0.3f
+#define APOGEE_DROP_M          5.0f
+#define DROUGE_DELAY_S         2.0f
 #define MAIN_DEPLOYING_ALT_M   150.0f
-#define PYRO_FIRE_MS          500
+#define PYRO_FIRE_MS           500
 
 // -- Minimum time guards (ms) ---------------------------------------
 #define MIN_TIME_POWERED_MS   500
-#define MIN_TIME_COASTING_MS     200
-#define MIN_TIME_DROGUE_MS   1000
-#define MIN_TIME_LANDED_MS   3000
+#define MIN_TIME_COASTING_MS  200
+#define MIN_TIME_DROGUE_MS    1000
+#define MIN_TIME_LANDED_MS    3000
 
 // -- Watchdog timeout -----------------------------------------------
 #define WDT_TIMEOUT_S           3
