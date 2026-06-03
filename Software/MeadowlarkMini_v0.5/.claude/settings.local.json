@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(command -v arduino-cli)",
+      "Bash(arduino-cli version *)",
+      "Bash(echo \"exit=$?\")",
+      "Bash(\"/c/Program Files/Arduino CLI/arduino-cli\" core list)",
+      "Bash(\"/c/Program Files/Arduino CLI/arduino-cli\" lib list)",
+      "Bash(\"/c/Program Files/Arduino CLI/arduino-cli\" compile --fqbn rp2040:rp2040:seeed_xiao_rp2040 \"C:/Users/colin/OneDrive/Documents/Arduino/MeadowlarkMini_v0.5\")",
+      "Bash(\"/c/Program Files/Arduino CLI/arduino-cli\" compile --fqbn rp2040:rp2040:seeed_xiao_rp2040 --warnings all \"C:/Users/colin/OneDrive/Documents/Arduino/MeadowlarkMini_v0.5\")"
+    ]
+  }
+}
