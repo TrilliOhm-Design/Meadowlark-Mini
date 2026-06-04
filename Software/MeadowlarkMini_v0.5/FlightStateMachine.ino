@@ -72,7 +72,7 @@ void runStateMachine() {
       // Apogee: barometric velocity has gone negative AND we have dropped a
       // small margin below the peak. Baro is primary here; it is immune to the
       // accelerometer's free-fall ambiguity.
-      if (velEst < APOGEE_VEL_MS && altAGL < (maxAltAGL - cfg.apogeeAltMargin)) {
+      if (velEst < APOGEE_VEL_MS && altAGL < (maxAltAGL - cfg.apogeeAltMargin)) { // add or aggressive check on each sensor to prevent single failure mode 
         if (++apogeeCount >= APOGEE_CONFIRM) {
           tApogee = now;
           apogeeBackupArmed = true;

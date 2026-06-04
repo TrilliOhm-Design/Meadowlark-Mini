@@ -86,9 +86,9 @@ const float    CAL_MOTION_TOL      = 1.5f;   // m/s^2 spread allowed during cal
 //     Sample counts are sized for the 100 Hz loop (~10 ms/sample).
 const uint8_t  LAUNCH_CONFIRM      = 8;          // ~80 ms sustained over threshold
 const uint8_t  BURNOUT_CONFIRM     = 12;         // ~120 ms
-const uint32_t MIN_BOOST_MS        = 150;        // ignore burnout before this
-const float    APOGEE_VEL_MS       = 0.0f;       // descending when v < this
-const uint8_t  APOGEE_CONFIRM      = 16;         // ~160 ms
+const uint32_t MIN_BOOST_MS        = 150;        // ms ignore burnout before this
+const float    APOGEE_VEL_MS       = 0.0f;       // m/s descending when v < this
+const uint8_t  APOGEE_CONFIRM      = 16;         // ~160 ms 
 
 // --- Landing detection
 const float    LANDED_VEL_MS       = 1.0f;       // |v| under this ...
