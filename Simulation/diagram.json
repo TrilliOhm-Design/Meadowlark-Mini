@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "author": "Dexter",
+  "editor": "wokwi",
+  "parts": [
+    {
+        "id": "pico",
+        "type": "wokwi-pi-pico",
+        "left": 0,
+        "top": 0
+    }
+  ],
+  "connections": []
+}

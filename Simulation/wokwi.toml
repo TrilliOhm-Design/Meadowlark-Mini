@@ -1,0 +1,4 @@
+[wokwi]
+version = 0.5
+firmware = '../Software/build/MeadowlarkMini_v0.5.ino.elf'
+elf = ''
