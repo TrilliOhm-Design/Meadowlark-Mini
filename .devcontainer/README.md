@@ -1,13 +1,17 @@
 # Dev Container Information
 
-### **!! You must do the following in order to property set up your dev container**
+## How to Connect to Dev Container
 
-After the dev container has finished its initialization and configuration, **Reload the Window**
+1. Ensure Docker Engine is running in background (open docker desktop)
+2. Rebuild and open the container with `ctrl + shift + P, Dev Containers: Rebuild and Open Container`
 
-`ctrl + shift + P > Developer: Reload Window`
+    **!! You must do the following in order to property set up your dev container**
 
-This restarts the Arduino Community Edition extension.
+3. After the dev container has finished its initialization and configuration, **Reload the Window**
 
+    `ctrl + shift + P > Developer: Reload Window`
+
+    This restarts the Arduino Community Edition extension.
 
 ## Helpful information
 
