@@ -1,0 +1,25 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/debian
+{
+	"name": "Meadowlark Mini Arduino",
+	"build": {
+		"dockerfile": "Dockerfile"
+	},
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"mhutchie.git-graph",
+				"pkief.material-icon-theme",
+				"ms-vscode.js-debug-companion",
+				"ms-vscode.vscode-serial-monitor",
+				"vscode-arduino.vscode-arduino-community",
+				"ms-vscode.cpptools",
+				"ms-vscode.cpptools-extension-pack",
+				"ms-vscode.cpptools-themes",
+				"ms-vscode.cmake-tools"
+			]
+		}
+	},
+	"postCreateCommand": "arduino-cli config init --overwrite && arduino-cli config add board_manager.additional_urls https://github.com/earlephilhower/arduino-pico/releases/download/global/package_rp2040_index.json && arduino-cli core update-index && arduino-cli core install rp2040:rp2040",
+	"remoteUser": "vscode"
+}
