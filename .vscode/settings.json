@@ -1,3 +1,4 @@
 {
     "arduino.useArduinoCli": true,
+    "arduino.path": "/usr/local/bin/arduino-cli"
 }
