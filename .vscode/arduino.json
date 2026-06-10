@@ -1,0 +1,7 @@
+{
+    "sketch": "Software\\MeadowlarkMini_v0.5\\MeadowlarkMini_v0.5.ino",
+    "configuration": "flash=2097152_0,freq=200,opt=Small,os=none,profile=Disabled,rtti=Disabled,stackprotect=Disabled,exceptions=Disabled,dbgport=Disabled,dbglvl=None,usbstack=picosdk,ipbtstack=ipv4only,uploadmethod=default",
+    "board": "rp2040:rp2040:seeed_xiao_rp2040",
+    "output": "Software\\build",
+    "intelliSenseGen": "global"
+}
