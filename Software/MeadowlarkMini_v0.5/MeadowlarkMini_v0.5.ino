@@ -46,7 +46,7 @@
 #include <Wire.h>
 #include <EEPROM.h>
 #include <Adafruit_LSM6DSO32.h>
-#include "MS5611.h"
+#include <MS5611.h>
 
 // ----------------------------------------------------------------------------
 //  Pin assignments
