@@ -11,5 +11,6 @@
         "ms-vscode.cpptools-extension-pack",
         "vscode.serial-monitor",
         "arduino.arduino-ide"
-    ]
+    ],
+    "C_Cpp.intelliSenseEngine": "default"
 }
