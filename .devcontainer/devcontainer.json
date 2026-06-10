@@ -10,9 +10,13 @@
 			"extensions": [
 				"mhutchie.git-graph",
 				"pkief.material-icon-theme",
+				"ms-vscode.js-debug-companion",
 				"ms-vscode.vscode-serial-monitor",
 				"vscode-arduino.vscode-arduino-community",
-				"ms-vscode.cpptools"
+				"ms-vscode.cpptools",
+				"ms-vscode.cpptools-extension-pack",
+				"ms-vscode.cpptools-themes",
+				"ms-vscode.cmake-tools"
 			]
 		}
 	},

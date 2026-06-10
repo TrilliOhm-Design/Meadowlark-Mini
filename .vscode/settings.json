@@ -1,4 +1,15 @@
 {
     "arduino.useArduinoCli": true,
-    "arduino.path": "/usr/local/bin/arduino-cli"
+    "arduino.path": "/usr/local/bin/arduino-cli",
+    "[arduino]": {
+        "editor.formatOnSave": true,
+        "editor.formatOnPaste": true
+    },
+    "extensions.ignoreRecommendations": false,
+    "extensions.recommendations": [
+        "vscode.cpptools",
+        "ms-vscode.cpptools-extension-pack",
+        "vscode.serial-monitor",
+        "arduino.arduino-ide"
+    ]
 }
